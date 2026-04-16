@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'M3'
+    }
+
+    stages {
+
+        stage('Clone') {
+            steps {
+                git branch: 'main', url: 'YOUR_REPO_LINK'
+            }
+        }
+
+        stage('Build & Test') {
+            steps {
+                bat 'mvn clean package'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                bat 'docker build -t springapp .'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                bat 'docker run -d -p 8081:8080 springapp'
+            }
+        }
+    }
+}
