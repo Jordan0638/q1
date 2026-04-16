@@ -1,16 +1,12 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'M3'
-    }
-
     stages {
 
         stage('Clone') {
             steps {
                 git branch: 'main',
-                url: 'YOUR_GITHUB_REPO'
+                url: 'https://github.com/Jordan0638/q1.git'
             }
         }
 
